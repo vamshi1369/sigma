@@ -216,8 +216,10 @@ class ProductScraper:
         return data
 
 if __name__ == "__main__":
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     file_name = "pharmacopeia-and-metrological-institutes-standards.txt"
+    input_file_path = os.path.join(script_dir, file_name)
     #input_file_path = os.path.join(file_name)
 
-    scraper = ProductScraper(file_name)
+    scraper = ProductScraper(input_file_path)
     scraper.scrape()
