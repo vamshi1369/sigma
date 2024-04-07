@@ -24,7 +24,7 @@ jobs:
           # You might need to install Chrome WebDriver and other necessary tools
 
       - name: Run scraper
-        run: python pharmacopeia-and-metrological-institutes-standards.py  # Replace 'your_script_name.py' with the name of your Python script
+        run: python3 pharmacopeia-and-metrological-institutes-standards.py  # Replace 'your_script_name.py' with the name of your Python script
 
       - name: Upload results
         uses: actions/upload-artifact@v2
