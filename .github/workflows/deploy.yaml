@@ -19,12 +19,13 @@ jobs:
           python-version: '3.9'  # Choose the appropriate Python version
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt  # Make sure you have a requirements.txt file with necessary dependencies
+        run: pip install -r requirements.txt
+        #run: |
+        #  pip install -r requirements.txt  # Make sure you have a requirements.txt file with necessary dependencies
           # You might need to install Chrome WebDriver and other necessary tools
 
       - name: Run scraper
-        run: python3 pharmacopeia-and-metrological-institutes-standards.py  # Replace 'your_script_name.py' with the name of your Python script
+        run: python3 product_scraping/pharmacopeia-and-metrological-institutes-standards.py
 
       - name: Upload results
         uses: actions/upload-artifact@v2
