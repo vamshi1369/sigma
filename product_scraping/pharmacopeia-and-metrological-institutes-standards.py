@@ -217,7 +217,7 @@ class ProductScraper:
 
 if __name__ == "__main__":
     file_name = "pharmacopeia-and-metrological-institutes-standards.txt"
-    input_file_path = os.path.join(file_name)
+    #input_file_path = os.path.join(file_name)
 
-    scraper = ProductScraper(input_file_path)
+    scraper = ProductScraper(file_name)
     scraper.scrape()
