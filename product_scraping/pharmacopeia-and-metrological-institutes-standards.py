@@ -4,14 +4,13 @@ from bs4 import BeautifulSoup
 import csv
 import os
 import time
-from utils import inputfolder, outputfolder
+from utils import headers
 from concurrent.futures import ThreadPoolExecutor
 import threading
 
 class ProductScraper:
-    def __init__(self, input_file, output_folder):
+    def __init__(self, input_file):
         self.input_file = input_file
-        self.output_folder = output_folder
         self.lock = threading.Lock()
         self.header = ['Product Name', 'Product ID', 'Product Description', 'Product Brand', 'Product URL', 'Product Size', 'Product Price', 'Product Availability', 'Grade', 'API Family', 'Agency', 'Manufacturer/Tradename', 'Application', 'Format', 'Storage Temp', 'Smiles String']
         self.scraped_urls = set()
@@ -33,10 +32,10 @@ class ProductScraper:
                 # if len(self.scraped_urls) >= 2000:
                 #     break
 
-        # Remove scraped URLs from the input file
-        remaining_urls = [url for url in urls if url not in self.scraped_urls]
-        with open(self.input_file, 'w') as file:
-            file.write('\n'.join(remaining_urls))
+        # # Remove scraped URLs from the input file
+        # remaining_urls = [url for url in urls if url not in self.scraped_urls]
+        # with open(self.input_file, 'w') as file:
+        #     file.write('\n'.join(remaining_urls))
 
         csv_name = os.path.splitext(os.path.basename(self.input_file))[0] + '.csv'
         csv_file_path = os.path.join(self.output_folder, csv_name)
@@ -218,9 +217,7 @@ class ProductScraper:
 
 if __name__ == "__main__":
     file_name = "pharmacopeia-and-metrological-institutes-standards.txt"
-    input_file_path = os.path.join(inputfolder, file_name)
+    input_file_path = os.path.join(file_name)
 
-    output_folder_path = outputfolder
-
-    scraper = ProductScraper(input_file_path, output_folder_path)
+    scraper = ProductScraper(input_file_path)
     scraper.scrape()
