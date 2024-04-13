@@ -27,11 +27,11 @@ class ProductScraper:
                 data = future.result()
                 with self.lock:
                     all_data.append(data)
-                if len(urls) >= 2000:
+                if len(urls) >= 20:
                     break
-
+        input_dir = os.path.dirname(self.input_file)
         csv_name = os.path.splitext(os.path.basename(self.input_file))[0] + '.csv'
-        csv_file_path = os.path.join(self.output_folder, csv_name)
+        csv_file_path = os.path.join(input_dir, csv_name)
 
         with open(csv_file_path, 'w', newline='', encoding='utf-8-sig') as csv_file:
             writer = csv.writer(csv_file)

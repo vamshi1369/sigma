@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: scraped-data
-          path: product_scraping_output  # Adjust this path to the folder where your CSV files are generated
+          path: . # Use the same directory
