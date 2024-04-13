@@ -25,17 +25,10 @@ class ProductScraper:
             all_data = []
             for future in futures:
                 data = future.result()
-                if data:
+                with self.lock:
                     all_data.append(data)
-                    with self.lock:
-                        self.scraped_urls.add(data[4]) # Assuming URL is at index 4
-                # if len(self.scraped_urls) >= 2000:
-                #     break
-
-        # # Remove scraped URLs from the input file
-        # remaining_urls = [url for url in urls if url not in self.scraped_urls]
-        # with open(self.input_file, 'w') as file:
-        #     file.write('\n'.join(remaining_urls))
+                if len(urls) >= 2000:
+                    break
 
         csv_name = os.path.splitext(os.path.basename(self.input_file))[0] + '.csv'
         csv_file_path = os.path.join(self.output_folder, csv_name)
@@ -65,8 +58,8 @@ class ProductScraper:
         chrome_options.add_argument("--allow-running-insecure-content")
 
         driver = webdriver.Chrome(options=chrome_options)
+        time.sleep(1)
         driver.get(url)
-        time.sleep(2)
         html_content = driver.page_source
         soup = BeautifulSoup(html_content, 'lxml')
 
